@@ -1,0 +1,16 @@
+application:
+  name: b2bcar
+  project: b2bcar.livemarket.business
+  cloud_region: aws/us-west-2
+  publicly_accessible: true
+databases:
+  - type: postgresql
+    version: "11.5"
+    name: postgresql
+    backup-window: 21-23
+routers:
+  - name: main
+    routes:
+      - application_name: b2bcar
+        paths:
+          - /
