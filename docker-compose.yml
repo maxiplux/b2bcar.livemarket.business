@@ -1,18 +1,17 @@
 version: '3.3'
 services:
-#  web:
-#    build: .
-#    container_name: apipostgress
-#    volumes:
-#      - ./composeexample:/code
-#    ports:
-#      - "8080:8080"
-#    links:
-#      - postgres
-#
-#    depends_on:
-#      - postgres
 
+  web:
+
+    image: maxiplux/livemarket.business.b2bcart:1.0.0
+    volumes:
+      - ./composeexample:/code
+    ports:
+      - "8080:8080"
+    links:
+      - postgres
+    depends_on:
+      - postgres
   postgres:
     image: postgres
     container_name: postgres

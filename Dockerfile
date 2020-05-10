@@ -1,17 +1,14 @@
-FROM adoptopenjdk/openjdk11:alpine AS build
-MAINTAINER Romaric Philogène <rphilogene@qovery.com>
-RUN apk update && apk upgrade && apk add bash
-RUN cd /usr/local/bin && wget https://services.gradle.org/distributions/gradle-5.6-all.zip && \
-/usr/bin/unzip gradle-5.6-all.zip && ln -s /usr/local/bin/gradle-5.6/bin/gradle /usr/bin/gradle
+# Start with a base image containing Java runtime
+FROM openjdk:12-jdk-alpine
+# Add Maintainer Info
 
-RUN mkdir -p /app
-COPY . /app
-WORKDIR /app
-RUN gradle build -x test
-FROM adoptopenjdk/openjdk11:alpine-slim
-MAINTAINER maxiplux <maxiplux@gmail.com>
-RUN apk update && apk upgrade && apk add bash
+# Add a volume pointing to /tmp
+VOLUME /tmp
+# Make port 8080 available to the world outside this container
 EXPOSE 8080
-COPY --from=build target/b2bcart-0.0.1-SNAPSHOT.jar /app.jar
-ENV JAVA_OPTS=""
-CMD exec java $JAVA_OPTS -jar /app.jar
+# The application's jar file
+ARG JAR_FILE=target/b2bcart-0.0.1-SNAPSHOT.jar
+# Add the application's jar to the container
+COPY ${JAR_FILE} app.jar
+# Run the jar file
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
