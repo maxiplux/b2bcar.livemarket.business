@@ -9,7 +9,7 @@ databases:
     name: postgresql
     backup-window: 21-23
 routers:
-  - name: main
+  - name: b2bcar
     routes:
       - application_name: b2bcar
         paths:
