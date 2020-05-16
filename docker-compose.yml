@@ -1,11 +1,15 @@
 version: '3.3'
 services:
-
   web:
-
-    image: maxiplux/livemarket.business.b2bcart:1.0.0
+    image: maxiplux/livemarket.business.b2bcart:1.0.2
     volumes:
       - ./composeexample:/code
+    environment:
+      POSTGRESQL_ADDRESS: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRESQL_DATABASE : postgres
+      POSTGRESQL_USERNAME: postgres
+      DATABASE_PORT : 5432
     ports:
       - "8080:8080"
     links:
@@ -20,8 +24,6 @@ services:
       POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
-
-
 
 volumes:
   dbdata:
