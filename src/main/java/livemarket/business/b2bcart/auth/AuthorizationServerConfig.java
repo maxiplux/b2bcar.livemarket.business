@@ -31,9 +31,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Autowired
     private InfoAdicionalToken infoAdicionalToken;
-    @Value("security.withclient")
-    private String clientEncodeValue;
     @Value("${security.withclient}")
+    private String clientEncodeValue;
+
+    @Value("${security.passwordencoder}")
     private String passwordEncodeValue;
 
     @Override
