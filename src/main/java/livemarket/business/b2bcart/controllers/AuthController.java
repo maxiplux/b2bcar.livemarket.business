@@ -30,7 +30,7 @@ public class AuthController {
     @PostMapping("/singin")
     @Secured({
             "ROLE_ADMIN",
-            "ROLE_USER"
+
     })
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", value = "Authorization ", required = true, dataType = "string", paramType = "header", defaultValue = "Bearer ")
