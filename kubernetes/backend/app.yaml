@@ -55,15 +55,15 @@ spec:
             requests:
               memory: "64Mi"
               cpu: "500m"
-#          livenessProbe:
-#            httpGet:
-#              path: /actuator/health
-#              port: 443
-#            timeoutSeconds: 60
-#            initialDelaySeconds: 120
-#          readinessProbe:
-#            httpGet:
-#              path: /actuator/health/db
-#              port: 443
-#            timeoutSeconds: 120
-#            initialDelaySeconds: 120
+          livenessProbe:
+            httpGet:
+              path: /actuator/liveness
+              port: 443
+            timeoutSeconds: 60
+            initialDelaySeconds: 120
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/db
+              port: 443
+            timeoutSeconds: 120
+            initialDelaySeconds: 120
