@@ -2,17 +2,19 @@ package livemarket.business.b2bcart.models.items;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import livemarket.business.b2bcart.models.AuditModel;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 @Data
+@Builder
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Item extends AuditModel {
 
@@ -26,6 +28,7 @@ public class Item extends AuditModel {
 
     @JsonIgnoreProperties(value = {"categories", "hibernateLazyInitializer", "handler"}, allowSetters = true)
     @ManyToOne(fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
     private Category category;
 
 

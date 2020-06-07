@@ -1,10 +1,10 @@
 package livemarket.business.b2bcart.controllers;
 
 
-
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import livemarket.business.b2bcart.errors.ValidationErrorBuilder;
+import livemarket.business.b2bcart.models.files.FileItemDto;
 import livemarket.business.b2bcart.models.items.Item;
 import livemarket.business.b2bcart.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +13,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -120,6 +124,33 @@ public class ProductController {
     @DeleteMapping(value = "{id}/")
     public void deleteEmployeeById(@PathVariable long id) {
         service.deleteProductById(id);
+    }
+
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "Authorization ", required = true, dataType = "string", paramType = "header", defaultValue = "Bearer ")
+    })
+
+    @PostMapping("/photos/add")
+    public ResponseEntity<FileItemDto> addPhoto(
+
+            @RequestParam("title") String title,
+            @RequestParam("itemPk") Integer itemPk,
+            @RequestParam("order") Integer order,
+            @RequestParam("isCovert") Boolean isCovert,
+            @RequestParam("file") MultipartFile file, Model model) throws IOException {
+
+
+        FileItemDto fileItemDto = service.addFileItem(title, order, itemPk, isCovert, file);
+        return new ResponseEntity<FileItemDto>(fileItemDto, HttpStatus.OK);
+    }
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "Authorization ", required = true, dataType = "string", paramType = "header", defaultValue = "Bearer ")
+    })
+
+    @GetMapping("/photos/{id}")
+    public ResponseEntity<List<FileItemDto>> getPhoto(@PathVariable String id) {
+        List<FileItemDto> fileItemDto = service.getFileByItemPk(id);
+        return new ResponseEntity<List<FileItemDto>>(fileItemDto, HttpStatus.OK);
     }
 
 

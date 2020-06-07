@@ -1,5 +1,5 @@
 # Start with a base image containing Java runtime
-#Sorry if you are reding this file with a lot of  errors , those errors are because I'll need  something to run on kubernetes
+#Sorry if you are reding this file with a lot of  errors using ubuntu was because i need something to run on kubernetes
 # Loockup on git the history to find the right version with alpine
 #FROM openjdk:12-jdk-alpine
 FROM  adoptopenjdk/openjdk12:jre-12.0.2_10-ubuntu
@@ -20,6 +20,6 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
 
 #docker build -t maxiplux/livemarket.business.b2bcart .
 #docker tag  3501cab4af42 maxiplux/livemarket.business.b2bcart:1.0.5
-#docker tag  39d440f82330 maxiplux/livemarket.business.b2bcart:kuerbernetes
+#docker tag  3501cab4af42 maxiplux/livemarket.business.b2bcart:kuerbernetes
 #docker push maxiplux/livemarket.business.b2bcart:kuerbernetes
 

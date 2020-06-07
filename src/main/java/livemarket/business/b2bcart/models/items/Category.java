@@ -2,16 +2,16 @@ package livemarket.business.b2bcart.models.items;
 
 
 import livemarket.business.b2bcart.models.AuditModel;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Data
+@Builder
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Category extends AuditModel {
 

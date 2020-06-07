@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 
 @RestController
-public class HelloWorldController {
+public class KubernesController {
 
     @GetMapping("/")
     public String helloWorld(){

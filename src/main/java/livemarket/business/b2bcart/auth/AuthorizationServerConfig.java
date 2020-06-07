@@ -37,6 +37,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Value("${security.passwordencoder}")
     private String passwordEncodeValue;
 
+    @Value("${security.token.time.to.live}")
+    private Integer tokeTimeToLive;
+
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security.tokenKeyAccess("permitAll()")
@@ -49,8 +52,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .secret(passwordEncoder.encode(passwordEncodeValue))
                 .scopes("read", "write")
                 .authorizedGrantTypes("password", "refresh_token")
-                .accessTokenValiditySeconds(3600)
-                .refreshTokenValiditySeconds(3600);
+                .accessTokenValiditySeconds(tokeTimeToLive)
+                .refreshTokenValiditySeconds(tokeTimeToLive);
     }
 
     @Override
